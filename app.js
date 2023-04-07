@@ -1,5 +1,10 @@
 const express = require("express");
 var compression = require('compression')
+require('dotenv').config()
+
+var mongoose = require('mongoose')
+const { v4: uuidv4 } = require('uuid');
+
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -16,61 +21,59 @@ app.get('/', (req, res) => {
 const server = require('http').Server(app);
 
 const io = require("socket.io")(server, {
-	cors: {
-        origin: '*'
-    }
+  cors: {
+    origin: '*',
+    methods: ["GET", "POST"]
+  }
 });
 
-io.on('connection', (socket) => {
-	console.log("Got connection!");
-	
-	socket.on('testEvent', (data) => {
-		console.log("Received test Event " + data);
-	});
-	
-	soc = socket;
-	socket.emit("testEvent", "Sending");
+///// DATABASE
+
+// loose schema for saving the data
+var mainSchema = new mongoose.Schema({}, {
+  strict: false,
+  collection: 'main'
 });
+var mainModel = mongoose.model('Main', mainSchema);
+
+// connect to MongoDB
+if (process.env.NODE_ENV === 'development') {
+  // Define the development db
+  mongoose.connect('mongodb://127.0.0.1/NeuroWebTech');
+} else if (process.env.NODE_ENV === 'production') {
+  // Define the production db
+  mongoose.connect(process.env.MONGODB_URI);
+};
+
+// open the database
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function callback() {
+  console.log('database opened');
+});
+
+/// WEBSOCKET Socket.io
+
+// open the socket 
+io.on('connection', (socket) => {
+
+  console.log("Connected Socket");
+  // send back a confirmation to Unity (not useful in production)
+  socket.emit("connectionstatus", "connected");
+
+  // define a simple callback
+  socket.on('ActionEvent', (data) => {
+    console.log("ActionEvent received " + data);
+    mainModel.create({
+      "ActionEvent": data
+    });
+  });
+  soc = socket;
+
+});
+
+/// LAUNCH SERVER
 
 server.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });
-
-/* WebGL incompatible
-const express = require('express')
-const app = express();
-const http = require('http').createServer(app);
-
-http.listen(3000, () => {
-  console.log('Server listening on port 3000');
-});
-
-const io = require('socket.io')(http);
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-
-});
-
-io.on('connection', (socket) => {
-    console.log('a user connected');
-
-    socket.on('message', (data) => {
-        
-      //Client have sent some message please do something about it.  
-        console.log('Message from client', data);
-        //sending response to client side
-        socket.emit('message', {date: new Date().getTime(), data: data});
-      });
-
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
-
-});
-
-*/
