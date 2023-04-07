@@ -23,6 +23,9 @@ const server = require('http').Server(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: '*',
+    credentials: true,
+    allowedHeaders: ["Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time"],
+    methods: ["GET, POST, OPTIONS"]
   }
 });
 
