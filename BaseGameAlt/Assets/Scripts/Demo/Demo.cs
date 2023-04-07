@@ -16,7 +16,8 @@ public class Demo : MonoBehaviour
     void Start()
     {
         // s = SocketIo.establishSocketConnection("ws://localhost:3000");
-        s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com");
+        // works perfectly: s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com");
+        s = SocketIo.establishSocketConnection(Application.absoluteURL);
         s.connect();
 
         // define reception callbacks here

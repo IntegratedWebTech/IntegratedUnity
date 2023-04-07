@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('connectionstatus', (data) => {
-    console.log(data);
+    console.log('URL: ' + data);
   });
 
   //soc = socket;
