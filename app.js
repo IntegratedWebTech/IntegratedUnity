@@ -70,7 +70,12 @@ io.on('connection', (socket) => {
       "ActionEvent": data
     });
   });
-  soc = socket;
+
+  socket.on('connectionstatus', (data) => {
+    console.log(data);
+  });
+
+  //soc = socket;
 
 });
 

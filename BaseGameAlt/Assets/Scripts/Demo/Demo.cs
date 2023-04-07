@@ -16,7 +16,7 @@ public class Demo : MonoBehaviour
     void Start()
     {
         // s = SocketIo.establishSocketConnection("ws://localhost:3000");
-        s = SocketIo.establishSocketConnection("ws://integrated-unity.onrender.com");
+        s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com");
         s.connect();
 
         // define reception callbacks here
@@ -24,7 +24,9 @@ public class Demo : MonoBehaviour
     }
 
     void call(string d) {
-        Debug.Log("connectionstatus: " + d);
+        Debug.Log("connectionstatus: " + Application.absoluteURL);
+        s.emit("connectionstatus", Application.absoluteURL); // replace with your message
+
         //s.emit("testEvent", "test");
         // myObject = JsonUtility.FromJson<MyClass>(json); method to convert received JSON to object
 
