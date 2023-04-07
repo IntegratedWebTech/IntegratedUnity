@@ -15,8 +15,8 @@ public class Demo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // s = SocketIo.establishSocketConnection("http://localhost:3000");
-        s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com:3000");
+        // s = SocketIo.establishSocketConnection("ws://localhost:3000");
+        s = SocketIo.establishSocketConnection("ws://integrated-unity.onrender.com");
         s.connect();
 
         // define reception callbacks here
