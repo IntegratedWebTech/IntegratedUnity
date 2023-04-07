@@ -76,7 +76,7 @@ If you want to run the experiment on a free render.com instance, you will need t
 - voilà :)
 
 
-### Other useful references
+### Useful references
 https://unityatscale.com/unity-meta-file-guide/faq/#should-i-choose-hidden-or-visible-meta-files-when-using-unity-with-a-version-control-system
 https://github.com/romainligneul/SocketIO-Express-Unity.2020
 https://github.com/KyleDulce/Unity-Socketio
