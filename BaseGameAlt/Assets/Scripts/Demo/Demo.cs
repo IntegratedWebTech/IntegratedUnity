@@ -15,9 +15,12 @@ public class Demo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // s = SocketIo.establishSocketConnection("ws://localhost:3000");
-        // works perfectly: s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com");
-        s = SocketIo.establishSocketConnection(Application.absoluteURL);
+
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            s = SocketIo.establishSocketConnection(Application.absoluteURL);
+        #else 
+            s = SocketIo.establishSocketConnection("https://integrated-unity.onrender.com");
+        #endif
         s.connect();
 
         // define reception callbacks here
@@ -25,23 +28,23 @@ public class Demo : MonoBehaviour
     }
 
     void call(string d) {
-        Debug.Log("connectionstatus: " + Application.absoluteURL);
-        s.emit("connectionstatus", Application.absoluteURL); // replace with your message
-
-        //s.emit("testEvent", "test");
-        // myObject = JsonUtility.FromJson<MyClass>(json); method to convert received JSON to object
+        
+        s.emit("connectionstatus",  "confirmed"); 
 
     }
 
     void Update()
     {
+
+        // dummy method to send a JSON structure each time the space bar is pressed
+        // the server must have a method socket.on("ActionEvent") to receive and process this event.
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ActionEvent respObject = new ActionEvent();
             respObject.ActionType="jump";
             respObject.TimeElapsed=Time.realtimeSinceStartup;
             string respJson = JsonUtility.ToJson(respObject);
-            s.emit("ActionEvent", respJson); // replace with your message
+            s.emit("ActionEvent", respJson); 
         }
     }
 
