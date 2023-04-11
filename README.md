@@ -15,10 +15,10 @@ This README will guide you through a local installation, enabling you to edit th
 ### Run it on your own computer
 
 #### Requirements
-- Git ([https://cli.github.com/](git cli) is useful)
-- Nodejs ([https://nodejs.org/en](version 18) will do)
-- MongoDB ([https://www.mongodb.com/try/download/community](Community edition)): if you do not have a cloud URI or if you want to develop using a local MongoDB database.
-- [https://unity.com/download](Unity) version 2020. It might worked on other version but I only tested 2020.
+- Git ([git cli](https://cli.github.com/) is useful)
+- Nodejs ([version 18](https://nodejs.org/en) will do)
+- MongoDB ([Community edition](https://www.mongodb.com/try/download/community)): if you do not have a cloud URI or if you want to develop using a local MongoDB database.
+- [Unity](https://unity.com/download) version 2020. It might work on other version but I only tested 2020.
 
 
 #### Installation
@@ -52,7 +52,7 @@ mongod --dbpath C:\whatever\path2yourlocaldatabase
 ```
 Note that C:\whatever\path2yourlocaldatabase should point to an empty directory that you have already created.
 Note also that your might need to add mongod.exe to your OS path.
-On Windows, you can proceed like this: [https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/](here) and add the following folder (if you did not alter MongoDB default installation): C:\Program Files\MongoDB\Server\6.0\bin
+On Windows, you can proceed like [this](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/) and add the following folder (if you did not alter MongoDB default installation): C:\Program Files\MongoDB\Server\6.0\bin
 
 Now you are ready to serve the game locally. In the first terminal (not the one which is running local MongoDB, if applicable), type:
 ```
