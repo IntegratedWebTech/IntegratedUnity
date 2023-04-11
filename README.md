@@ -67,7 +67,7 @@ Voilà!
 
 #### Configuration (render.com)
 
-If you want to run the experiment on a free render.com instance, you will need to:
+If you want to run the experiment on a free [render.com](render.com) instance, you will need to:
 - fork/duplicate the repository in your own Github account.
 - point render.com to that repository
 - configure a web service in render.com and add the 2 config variables of your .env file on render ('Advanced' tab of the deployment page)
