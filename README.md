@@ -36,14 +36,14 @@ Now you have all the files ready.
 
 #### Configuration (local)
 
-In order to communicate with the database, your Nodejs server (defined in app.js) must use the correct MongoDB URI. You need to create a .env file in the root folder (i.e IntegratedWebTech) and to write
+In order to communicate with the database, your Nodejs server (defined in app.js) must use the correct MongoDB URI. You need to create a .env file in the root folder (i.e IntegratedWebTech) and to fill it with
 
 ```
 NODE_ENV='production'
 MONGODB_URI='mongodb+srv://<here comes the URI provided by mongoDB cloud.';
 ```
 
-Note that the MONGODB_URI variable is only needed if you want to feed a cloud MongoDB database.
+Make sure you did not create a .env.txt file and note that the MONGODB_URI variable is only needed if you want to feed a cloud MongoDB database.
 If you develop locally, you do not need to change this line. Instead, just define NODE_ENV='development'.
 In this case, just before the next step, open another command window / terminal and type:
 

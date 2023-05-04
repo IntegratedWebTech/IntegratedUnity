@@ -1,15 +1,15 @@
 const express = require("express");
-var compression = require('compression')
-require('dotenv').config()
+var compression = require('compression');
+require('dotenv').config();
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 
 const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use(compression())
+app.use(compression());
 
 app.use(express.static(path.join(__dirname, 'BaseGameAltWebGL')));
 
@@ -38,15 +38,19 @@ var mainSchema = new mongoose.Schema({}, {
 });
 var mainModel = mongoose.model('Main', mainSchema);
 
+/*
 // connect to MongoDB
 if (process.env.NODE_ENV === 'development') {
   // Define the development db
+  */
   mongoose.connect('mongodb://127.0.0.1/NeuroWebTech');
+
+  /*
 } else if (process.env.NODE_ENV === 'production') {
   // Define the production db
   mongoose.connect(process.env.MONGODB_URI);
 };
-
+*/
 // open the database
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
